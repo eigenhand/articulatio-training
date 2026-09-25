@@ -1,0 +1,38 @@
+# Python dependencies of the training code, derived from the imports in this
+# repository. Install with:  pip install -r requirements.txt
+#
+# PyTorch is NOT listed on purpose: install torch + torchaudio for your platform
+# first (e.g. the ROCm wheels for AMD GPUs, see README.md). The German runs used
+# torch 2.9.1 (ROCm 6.4 wheels) on Python 3.12.
+#
+# The inference API server, the Docker image and the engine's unit tests use
+# requirements-engine.txt (the upstream engine's pinned list) instead.
+#
+# System tools used by some scripts: ffmpeg (with libmp3lame and libopus),
+# espeak-ng, pigz, libsndfile.
+
+# --- engine (breeze_infer/, models/) and core training (de_lora/core)
+transformers==4.57.3        # same pin as the engine (requirements-engine.txt)
+qwen-tts==0.1.1             # audio tokenizer (Qwen3TTSTokenizer); same pin as the engine
+numpy>=2.0
+soundfile>=0.13
+peft>=0.13
+accelerate
+tensorboard>=2.17           # optional: training curves (train_lora.py runs without it)
+
+# --- data preparation (de_lora/data, tools/)
+librosa>=0.10
+scipy>=1.13
+pyarrow>=17
+num2words>=0.5
+wordfreq>=3.1               # tools/analyse_seltene_woerter.py
+huggingface_hub[hf_transfer]>=0.25   # de_lora/data/download_datasets.py (pt-BR template corpora)
+
+# --- evaluation (de_lora/eval)
+faster-whisper>=1.0         # WER/CER of the audio samples written during training
+speechbrain>=1.0            # speaker similarity (ECAPA); also de_lora/data/tagarela_speakers.py
+
+# --- optional: pt-BR podcast scraping pipeline inherited from the template (de_lora/scraping)
+# pyannote.audio>=4.0
+# silero-vad>=5.1
+# requests>=2.32

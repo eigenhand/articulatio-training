@@ -1,0 +1,60 @@
+runs/
+outputs/
+warmup_manifest.json
+*.wav
+
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.vscode/
+.idea/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+.env
+.env.*
+!.env.example
+
+# ---------------------------------------------------------------- LoRA training
+# Heavy / generated artifacts (NEVER go into git):
+artifacts/
+datasets/
+training/
+/models/Breeze-TTS-2/
+_ref/
+*.safetensors
+*.npz
+*.parquet
+*.tar.gz
+*.ckpt
+*.pt
+*.pth
+*.gguf
+*.i16
+
+# Local environment and caches
+.venv/
+.miopen/
+
+# Outputs of the scraping pipeline
+de_lora/scraping/work/
+de_lora/scraping/data/
+de_lora/scraping/pilot_audit/
+de_lora/scraping/config/yt-dlp-cookies/
+cookies.txt
+
+# Scratch
+*.log
+
+# Personal/local files (mirror the root; not published)
+.local/
+
+# release evaluation: test set, generated audio and reports (docs/results holds the published numbers)
+de_lora/eval/release/testset/
+de_lora/eval/release/out/
+de_lora/eval/release/results/
+*.pcm
+# macOS
+.DS_Store

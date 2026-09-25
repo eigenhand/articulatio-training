@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Articulatio-DE: German LoRA training recipe for Breeze TTS 2"
+abstract: >-
+  Training and evaluation pipeline for a German (plus English) LoRA adapter on
+  top of Breeze TTS 2, a codec language model for text-to-speech, with
+  rare-word coverage, Common Voice selection, sampler re-weighting and
+  noise-augmented reference prompts.
+type: software
+authors:
+  - given-names: "Christoph"
+    family-names: "Lindl-Guk"
+    alias: "eigenhand"
+repository-code: "https://github.com/eigenhand/articulatio-training"
+license: Apache-2.0
+keywords:
+  - text-to-speech
+  - LoRA
+  - PEFT
+  - German
+  - codec language model
+references:
+  - type: software
+    title: "PT-BR LoRA training for Breeze TTS 2"
+    authors:
+      - family-names: "Monteiro"
+        given-names: "Ednilson"
+    repository-code: "https://github.com/EdnilsonMonteiro/breeze-tts2-ptbr-lora-training"
+    license: Apache-2.0
+  - type: software
+    title: "Breeze TTS 2"
+    authors:
+      - name: "BreezeBlue (RESONIA, INC.)"
+    url: "https://github.com/breezeblue-ai/breeze-tts"

@@ -1,0 +1,65 @@
+This project is based on breeze-tts2-ptbr-lora-training by EdnilsonMonteiro
+(Apache-2.0) and has been modified:
+(source: https://github.com/EdnilsonMonteiro/breeze-tts2-ptbr-lora-training,
+commit 6c414bd)
+
+- Adapted from Brazilian Portuguese to German (plus English): the package
+  ptbr_lora/ is now de_lora/; German and English instruction pools selected by
+  the corpus-name suffix (_de / _en); number expansion (num2words) selected by
+  the same suffix; German probe sentences plus English/Chinese regression
+  probes for the audio samples, with a per-language WER check.
+- New corpus builders: CML-TTS German (referenced through a symlink, no copy),
+  HUI-Audio-Corpus-German (SNR and mains-hum filtering) and HiFiTTS-2 (English).
+- A consolidated codec-code store (one int16 stream plus an index) replaces the
+  per-utterance .npz files and the wavs24/ copies.
+- The parity check uses gold examples from all corpora (the template only used
+  its "tata" corpus and therefore checked nothing for other corpora).
+- Fixed the seconds-per-step value in the training log (it was divided by
+  grad_acc twice).
+- Rare-word tooling: word lists from wordfreq, tokenizer coverage and
+  espeak-ng stress; mining of clips with rare words in Thorsten-Voice, CML-TTS
+  and Common Voice; restoring the capitalization of lowercase transcripts; a
+  per-clip rare-word re-weighting of the training sampler.
+- A broad Common Voice selection capped per speaker, and corpus weights.
+- Noise-augmented reference prompts with a "clean studio recording" instruction.
+- Scripts for merging a LoRA and converting it to GGUF, run recipes, ROCm
+  (MIOpen) setup, configuration through environment variables, and English
+  documentation; comments and messages were translated to English.
+- docker/Dockerfile now installs requirements-engine.txt (the engine's former
+  requirements.txt); requirements.txt lists the training dependencies.
+
+Modifications copyright 2026 Christoph Lindl-Guk (eigenhand)
+
+The Breeze TTS 2 model weights and any derivative weights (for example LoRA
+adapters trained with this code) are NOT covered by the Apache License of this
+code; they are governed by the BreezeBlue Research and Non-Commercial License
+Agreement (https://huggingface.co/BreezeBlue/Breeze-TTS-2/blob/main/LICENSE).
+
+---------------------------------------------------------------------------
+NOTICE of breeze-tts2-ptbr-lora-training, reproduced as required by
+section 4(d) of the Apache License 2.0. (Its code under ptbr_lora/
+corresponds to de_lora/ in this repository.)
+---------------------------------------------------------------------------
+
+Breeze TTS 2 — Attribution and License Notice
+=============================================
+
+Breeze TTS 2 is licensed under the BreezeBlue Research and Non-Commercial
+License Agreement. Copyright (c) 2026 RESONIA, INC. All Rights Reserved.
+
+The engine source code in this repository (breeze_infer/, models/, infer.py,
+etc.) is licensed under the Apache License, Version 2.0; see LICENSE.
+
+The code under `ptbr_lora/` adds training and evaluation utilities for a
+Portuguese (pt-BR) LoRA adapter derived from Breeze TTS 2. It is distributed
+under the same terms as the engine code (Apache-2.0), and any model produced
+with it is a Derivative Model governed by the BreezeBlue Research and
+Non-Commercial License.
+
+If you distribute an adapter (or other derivative) produced with this code, you
+must include this Notice and prominently state:
+
+  "Derived from Breeze TTS 2 by BreezeBlue and licensed for research and
+   non-commercial use only."
+
+No endorsed or official affiliation with BreezeBlue is implied.
